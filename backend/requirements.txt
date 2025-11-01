@@ -3,3 +3,6 @@ uvicorn
 python-jose[cryptography]
 cryptography
 requests
+sqlalchemy
+psycopg2-binary
+python-dotenv
