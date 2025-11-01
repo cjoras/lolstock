@@ -1,0 +1,30 @@
+.leaderboard {
+  background: #111;
+  color: #eee;
+  padding: 1.5rem;
+}
+
+.leaderboard h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard th, .leaderboard td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.leaderboard tr:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+
+.leaderboard th {
+  color: #ffcc00;
+  font-weight: 600;
+}

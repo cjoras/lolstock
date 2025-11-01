@@ -1,0 +1,46 @@
+.market-movers {
+  background: #111;
+  color: #eee;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.market-movers h2 {
+  text-align: center;
+  color: #ffcc00;
+  margin-bottom: 1.5rem;
+}
+
+.movers-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.market-movers table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.market-movers th,
+.market-movers td {
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.market-movers td.green {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.market-movers td.red {
+  color: #f44336;
+  font-weight: 600;
+}
+
+.market-movers tr:hover {
+  background-color: rgba(255,255,255,0.05);
+}
