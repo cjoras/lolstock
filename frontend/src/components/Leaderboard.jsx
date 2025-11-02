@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { getLeaderboard } from "../services/api";
+import axios from "axios";
 import "./Leaderboard.css";
 
 const Leaderboard = () => {
   const [leaders, setLeaders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const load = async () => {
+    const fetchLeaderboard = async () => {
       try {
-        const res = await getLeaderboard();
-        setLeaders(res);
+        const res = await axios.get("http://127.0.0.1:8000/api/leaderboard/");
+        setLeaders(res.data);
       } catch (err) {
         console.error("Feil ved henting av leaderboard:", err);
+      } finally {
+        setLoading(false);
       }
     };
-    load();
+    fetchLeaderboard();
   }, []);
 
   if (loading) return <p>Laster leaderboard...</p>;
