@@ -1,21 +1,39 @@
+# backend/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine
 from models import Base
-from routers import players, transactions, auth, users, leaderboard, player_history, market_history, market, system  # ← sørg for at disse finnes
+from routers import (
+    players,
+    transactions,
+    auth,
+    users,
+    leaderboard,
+    player_history,
+    market_history,
+    market,
+    system,
+)
 
 app = FastAPI()
 
 # DB init
 Base.metadata.create_all(bind=engine)
 
-# CORS – må tillate Authorization-header
+# Tillatte frontend-opprinnelser (lokalt + Render)
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://lolstock-frontend.onrender.com",
+]
+
+# CORS-konfig
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],  # inkluderer Authorization
+    allow_headers=["*"],  # inkluderer Authorization-header
 )
 
 # Routers
