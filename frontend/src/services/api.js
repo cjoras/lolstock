@@ -2,7 +2,7 @@
 import axios from "axios";
 import { loginRequest } from "../authConfig";
 
-// Dynamisk base-URL: miljøvariabel eller fallback til lokal/Render
+// Bruk Render i produksjon, localhost lokalt
 const BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
   (window.location.hostname.includes("localhost")
