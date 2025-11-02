@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
+import { getMarketHistory } from "../services/api";
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
 
 const MarketOverviewChart = () => {
   const [data, setData] = useState([]);
@@ -18,8 +9,8 @@ const MarketOverviewChart = () => {
   useEffect(() => {
     const fetchMarket = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/market/history");
-        setData(res.data);
+        const res = await getMarketHistory();
+        setData(res);
       } catch (err) {
         console.error("Feil ved henting av markedsdata:", err);
       } finally {
