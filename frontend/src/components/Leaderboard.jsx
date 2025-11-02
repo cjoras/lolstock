@@ -1,5 +1,6 @@
+// frontend/src/components/Leaderboard.jsx
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getLeaderboard } from "../services/api";
 import "./Leaderboard.css";
 
 const Leaderboard = () => {
@@ -7,17 +8,17 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchLeaderboard = async () => {
+    const load = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/leaderboard/");
-        setLeaders(res.data);
+        const res = await getLeaderboard();
+        setLeaders(res);
       } catch (err) {
         console.error("Feil ved henting av leaderboard:", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchLeaderboard();
+    load();
   }, []);
 
   if (loading) return <p>Laster leaderboard...</p>;
@@ -43,7 +44,9 @@ const Leaderboard = () => {
               <td>{u.name}</td>
               <td>{u.balance.toLocaleString()} 💰</td>
               <td>{u.holdings_value.toLocaleString()} 🪙</td>
-              <td><strong>{u.total_portfolio_value.toLocaleString()}</strong> 🏅</td>
+              <td>
+                <strong>{u.total_portfolio_value.toLocaleString()}</strong> 🏅
+              </td>
             </tr>
           ))}
         </tbody>
