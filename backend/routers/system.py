@@ -20,7 +20,7 @@ def trigger_update(x_api_key: str = Header(None)):
 
     try:
         result = subprocess.run(
-            ["python", "backend/update_players.py"],
+            ["python", "update_players.py"],
             capture_output=True,
             text=True,
             timeout=120
