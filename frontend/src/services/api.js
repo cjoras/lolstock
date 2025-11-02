@@ -2,12 +2,13 @@
 import axios from "axios";
 import { loginRequest } from "../authConfig";
 
-// Bruk Render i produksjon, localhost lokalt
-const BASE_URL =
+const RAW_BASE =
   import.meta.env.VITE_API_BASE_URL ||
   (window.location.hostname.includes("localhost")
     ? "http://127.0.0.1:8000"
     : "https://lolstock.onrender.com");
+
+const BASE_URL = RAW_BASE.replace(/\/+$/, ""); // fjern trailing slash
 
 console.log("🌍 API BASE_URL:", BASE_URL);
 
@@ -63,5 +64,20 @@ export async function sellShares(userId, playerId, shares) {
   const { data } = await axios.post(`${BASE_URL}/api/transactions/sell`, null, {
     params: { user_id: userId, player_id: playerId, shares },
   });
+  return data;
+}
+
+export async function getMarketHistory() {
+  const { data } = await axios.get(`${BASE_URL}/api/market/history`);
+  return data;
+}
+
+export async function getMarketSummary() {
+  const { data } = await axios.get(`${BASE_URL}/api/market/summary`);
+  return data;
+}
+
+export async function getLeaderboard() {
+  const { data } = await axios.get(`${BASE_URL}/api/leaderboard/`);
   return data;
 }
