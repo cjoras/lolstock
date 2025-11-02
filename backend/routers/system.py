@@ -13,6 +13,9 @@ def trigger_update(x_api_key: str = Header(None)):
     Kjører update_players.py trygt via en sikret API-nøkkel.
     Brukes av cron-job.org eller admin.
     """
+    print(f"🔎 Received header: {x_api_key!r}")
+    print(f"🔐 Expected header: {ADMIN_KEY!r}")
+
     if not ADMIN_KEY:
         raise HTTPException(status_code=500, detail="Server missing ADMIN_API_KEY config")
     if x_api_key != ADMIN_KEY:
