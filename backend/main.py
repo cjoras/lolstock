@@ -20,20 +20,20 @@ app = FastAPI()
 # DB init
 Base.metadata.create_all(bind=engine)
 
-# Tillatte frontend-opprinnelser (lokalt + Render)
+# Tillatte domener
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://lolstock-frontend.onrender.com",
+    "https://lolstock.onrender.com", 
 ]
 
-# CORS-konfig
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],  # inkluderer Authorization-header
+    allow_headers=["*"], 
 )
 
 # Routers
