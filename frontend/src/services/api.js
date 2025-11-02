@@ -1,7 +1,7 @@
 import axios from "axios";
 import { loginRequest } from "../authConfig";
 
-const BASE = "http://127.0.0.1:8000";
+const BASE = "https://lolstock.onrender.com";
 
 async function getAccessToken(instance, account) {
   const active = account || instance.getActiveAccount();
