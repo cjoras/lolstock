@@ -11,7 +11,7 @@ const PlayerHistoryChart = ({ playerId }) => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/players/${playerId}/history`);
+        const res = await axios.get(`https://lolstock.onrender.com/api/players/${playerId}/history`);
         setHistory(res.data.history);
         setPlayer(res.data.player);
         setChange(res.data.change_24h);
