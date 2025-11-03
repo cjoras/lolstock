@@ -16,7 +16,7 @@ export default function TradePanel() {
 
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/transactions/${type}`,
+        `http://lolstock.onrender.com/api/transactions/${type}`,
         null,
         {
           params: {
