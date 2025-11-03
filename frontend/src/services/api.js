@@ -2,16 +2,16 @@
 import axios from "axios";
 import { loginRequest } from "../authConfig";
 
-const RAW_BASE =
-  import.meta.env.VITE_API_BASE_URL ||
+// Dynamisk base-URL med sikker fallback
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, "") ||
   (window.location.hostname.includes("localhost")
     ? "http://127.0.0.1:8000"
     : "https://lolstock.onrender.com");
 
-const BASE_URL = RAW_BASE.replace(/\/+$/, ""); // fjern trailing slash
-
 console.log("🌍 API BASE_URL:", BASE_URL);
 
+// --- Auth token helper ---
 async function getAccessToken(instance, account) {
   const active = account || instance.getActiveAccount();
   if (!active) throw new Error("Ingen aktiv konto (ikke logget inn)");
@@ -29,6 +29,7 @@ async function getAccessToken(instance, account) {
   }
 }
 
+// --- Auth ---
 export async function postLogin(instance, account) {
   const entra_id = account?.idTokenClaims?.oid;
   const name = account?.name || account?.username || "Unknown";
@@ -37,22 +38,22 @@ export async function postLogin(instance, account) {
   return data;
 }
 
+// --- Users ---
+export async function getUserMe(instance, account) {
+  const token = await getAccessToken(instance, account);
+  const { data } = await axios.get(`${BASE_URL}/api/users/me`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data;
+}
+
+// --- Players ---
 export async function getPlayers() {
   const { data } = await axios.get(`${BASE_URL}/api/players/`);
   return data;
 }
 
-export async function getUserMe(instance, account) {
-  const token = await getAccessToken(instance, account);
-  const url = `${BASE_URL}/api/users/me`;
-  const { data } = await axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return data;
-}
-
+// --- Transactions ---
 export async function buyShares(userId, playerId, shares) {
   const { data } = await axios.post(`${BASE_URL}/api/transactions/buy`, null, {
     params: { user_id: userId, player_id: playerId, shares },
@@ -67,6 +68,7 @@ export async function sellShares(userId, playerId, shares) {
   return data;
 }
 
+// --- Market ---
 export async function getMarketHistory() {
   const { data } = await axios.get(`${BASE_URL}/api/market/history`);
   return data;
@@ -77,6 +79,7 @@ export async function getMarketSummary() {
   return data;
 }
 
+// --- Leaderboard ---
 export async function getLeaderboard() {
   const { data } = await axios.get(`${BASE_URL}/api/leaderboard/`);
   return data;
