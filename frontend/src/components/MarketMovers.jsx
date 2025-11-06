@@ -9,7 +9,7 @@ const MarketMovers = () => {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const res = await axios.get("http://lolstock.onrender.com/api/market/summary");
+        const res = await axios.get("https://lolstock.onrender.com/api/market/summary");
         const sorted = res.data.sort((a, b) => b.price_change_24h - a.price_change_24h);
         setPlayers(sorted);
       } catch (err) {
@@ -76,5 +76,4 @@ const MarketMovers = () => {
   );
 };
 
-// 👇 Denne linjen MÅ være med
 export default MarketMovers;

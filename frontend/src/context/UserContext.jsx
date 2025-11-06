@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [playerPrices, setPlayerPrices] = useState([]);
   const [me, setMe] = useState(null);
-  const [marketChanges, setMarketChanges] = useState([]); // henter fra /api/market/summary
+  const [marketChanges, setMarketChanges] = useState([]); 
 
   // Sørg for aktiv konto
   useEffect(() => {
@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
           setMe(null);
         }
 
-        const summary = await axios.get("http://127.0.0.1:8000/api/market/summary");
+        const summary = await axios.get("https://lolstock.onrender.com/api/market/summary");
         setMarketChanges(summary.data);
       } catch (err) {
         console.error("❌ Feil ved lasting av data:", err);
@@ -94,7 +94,7 @@ export const UserProvider = ({ children }) => {
     totalHoldingsValue,
     balance,
     portfolioValue,
-    dailyChange, // ✅ nå tilgjengelig
+    dailyChange,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

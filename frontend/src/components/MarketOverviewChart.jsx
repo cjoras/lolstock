@@ -55,6 +55,7 @@ const MarketOverviewChart = () => {
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="#333" />
           <XAxis
+            domain={['dataMin - 50', 'dataMax + 50']}
             dataKey="timestamp"
             tickFormatter={(t) =>
               new Date(t).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
