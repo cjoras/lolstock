@@ -55,13 +55,12 @@ const MarketOverviewChart = () => {
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="#333" />
           <XAxis
-            domain={['dataMin - 50', 'dataMax + 50']}
             dataKey="timestamp"
             tickFormatter={(t) =>
               new Date(t).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
             }
           />
-          <YAxis />
+          <YAxis domain={['dataMin - 50', 'dataMax + 50']} />
           <Tooltip
             contentStyle={{ backgroundColor: "#222", border: "1px solid #555" }}
             labelFormatter={(t) => new Date(t).toLocaleString()}
